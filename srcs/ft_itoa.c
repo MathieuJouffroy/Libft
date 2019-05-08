@@ -16,15 +16,17 @@ char				*ft_itoa(int nb)
 {
 	char			*res;
 	size_t			len;
+	size_t			i;
 
 	len = ft_digitcount(nb);
 	if (!(res = (char*)ft_strnew(len + (nb < 0 ? 1 : 0))))
 		return (NULL);
+	i = 0;
 	if (nb < 0)
-		res[0] = '-';
-	while (len--)
+		res[i++] = '-';
+	while (i < len)
 	{
-		res[len + (nb < 0 ? 1 : 0)] = '0' + (nb % 10) * (nb > 0 ? 1 : -1);
+		res[--len] = '0' + (nb % 10);
 		nb = nb / 10;
 	}
 	return (res);
